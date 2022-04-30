@@ -17,16 +17,17 @@ const { NotImplementedError } = require('../extensions/index.js');
  */
 function renameFiles(names) {
   return names.map((name, idx) => {
-    if(names.slice(idx+1, names.length).includes(base)) {
-      
-      let [base, counter = ''] = name.split('('); 
+    let c = 1;
 
-      counter = counter ? 1 : counter.split(')')[0] + 1;
-      return `${base}(${counter})`;
+		for(let i = idx + 1; i < names.length; i++) {
+			if(names[idx] === names[i]){
+				names[i] = `${names[i]}(${c})`;
+				c++;
+			}
     }
-
     return name;
 
+    
   });
 }
 
