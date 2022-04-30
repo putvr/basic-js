@@ -19,36 +19,23 @@ function getSeason(date) {
   if(!(date instanceof Date)) {
     throw Error('Invalid date!');
   }
-  const n1 = new Date(Date.parse(date.valueOf()));
 
-  const n2 = new Date(
-    date.getFullYear(),
-    date.getMonth(),
-    date.getDate(),
-    date.getHours(),
-    date.getMinutes(),
-    date.getSeconds(),
-    date.getMilliseconds()
-  );
-
-  if(date - n2 !== 0) {
+  if(Object.getOwnPropertyNames(date).length > 0){
     throw Error('Invalid date!');
   }
  
   const m = date.getMonth();
 
-  if (m <= 1 || m === 11) {
-    return 'winter';
-  }
-  if (m <= 4) {
-    return 'spring';
-  }  
-  if (m <= 7) {
-    return 'summer';
-  } else {
-    return 'autumn';
-  }
-
+	if (m > 1 && m < 5) {
+		return 'spring';
+	}
+	if (m > 4 && m < 8) {
+		return 'summer';
+	}
+	if (m > 7 && m < 11) {
+		return 'autumn';
+	}
+	return 'winter';
 }
 
 module.exports = {
