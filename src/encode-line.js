@@ -11,27 +11,25 @@ const { NotImplementedError } = require('../extensions/index.js');
  *
  */
 function encodeLine(str) {
-  let out = [str[0]];
-  let zip = [];
+	let res = [];
+	let count = 1;
 
-  for(let s of str.slice(1)) {
-    const zipLast = zip[zip.length-1];
+	for (let i = 0; i < str.length; i++) {
+		const current = str[i];
+		const next = str[i + 1];
 
-    if(s === zipLast) {
-      zip.push(s);
+		if(current === next) {
+			count++;
       continue;
-    }
-
-    const l = `${zip.length}${s}`;
-
-    out.push(l);
-    zip = [];
-
-    // const outLast = out[out.length-1];
-    
-  }
-
-  return out.join('');
+		} 
+			
+    if(count !== 1) {
+			res.push(count);
+		}
+		res.push(current);
+		count = 1;
+	}
+	return res.join('');
 }
 
 module.exports = {
